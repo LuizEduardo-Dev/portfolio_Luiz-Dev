@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1050 250">
+  <text 
+    x="50%" y="50%" 
+    text-anchor="middle" 
+    dominant-baseline="central" 
+    font-family="sans-serif" 
+    font-weight="900" 
+    font-size="120"
+    fill="white"
+  >
+   <tspan x="50%" dy="-0.6em">LUIZ</tspan>
+    <tspan x="50%" dy="1.2em">EDUARDO</tspan>
+  </text>
+</svg>
