@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Anton, Inter } from "next/font/google";
 import "./globals.css";
 import { SmoothScroll } from "@/components/animations/SmoothScroll";
 import { CustomCursor } from "@/components/ui/customCursor";
+import { Navbar } from "@/components/ui/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,6 +42,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${anton.variable} ${inter.variable} antialiased`}
       >
         {/* <CustomCursor/> */}
+        <Navbar/>
         <SmoothScroll>
           <main>
             {children}
