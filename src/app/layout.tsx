@@ -5,6 +5,7 @@ import { SmoothScroll } from "@/components/animations/SmoothScroll";
 import { CustomCursor } from "@/components/ui/customCursor";
 import { Navbar } from "@/components/ui/Navbar";
 import { LanguageProvider } from "@/context/LanguageContext";
+import { BackToTop } from "@/components/ui/BackToTop";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,6 +47,7 @@ export default function RootLayout({
         <LanguageProvider>
           <Navbar />
           <SmoothScroll>
+            <BackToTop/>
             <main>
               {children}
             </main>

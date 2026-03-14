@@ -22,6 +22,15 @@ const translations = {
     timeline26Title: "Arquitetura & Projetos Complexos",
     timeline26Desc: "Desenvolvimento de projetos robustos como o SaaS HelpDesk e arquiteturas modulares orientadas a servidor. Explorando mensageria com Kafka e conteinerização com Docker.",
 
+    // CONTACT SECTION
+    contactSubtitle: "SYSTEM_CONNECT",
+    contactTitle: "Vamos Construir Algo?",
+    contactDesc: "Tem uma ideia inovadora, uma oportunidade de projeto ou precisa escalar seu sistema? Meu terminal está aberto para novas conexões.",
+    btnWhatsapp: "Iniciar Conexão Direta",
+    waMessage: "Olá Luiz! Vi seu portfólio e gostaria de conversar sobre uma oportunidade/projeto.",
+    btnEmail: "E-mail",
+
+
   },
   en: {
     systemBoot: "[SYSTEM]: INITIALIZING_CORE_V2.026...",
@@ -42,6 +51,13 @@ const translations = {
     timeline26Title: "Architecture & Complex Projects",
     timeline26Desc: "Developing robust projects like a SaaS HelpDesk and server-driven modular architectures. Exploring message brokering with Kafka and containerization with Docker.",
   
+    // CONTACT SECTION
+    contactSubtitle: "SYSTEM_CONNECT",
+    contactTitle: "Let's Build Something?",
+    contactDesc: "Have an innovative idea, a project opportunity, or need to scale your system? My terminal is open for new connections.",
+    btnWhatsapp: "Initialize Direct Link",
+    waMessage: "Hi Luiz! I saw your portfolio and would like to chat about an opportunity/project.",
+    btnEmail: "E-mail",
   
   }
 };
