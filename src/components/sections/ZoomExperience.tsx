@@ -7,6 +7,7 @@ import { ScrollIndicator } from '../animations/ScrollIndicator';
 import { TechGrid } from '../ui/TechGrid';
 import { useLanguage } from '@/context/LanguageContext';
 import { useLenis } from 'lenis/react';
+import { WavyBackground } from '../ui/wavy-background';
 
 export const ZoomExperience = () => {
   const container = useRef<HTMLDivElement>(null);
@@ -130,6 +131,23 @@ export const ZoomExperience = () => {
 
   return (
     <section ref={container} className="relative h-screen w-full overflow-hidden bg-black grainy-bg">
+
+    <div className="absolute inset-0 z-0 opacity-60 pointer-events-none mix-blend-screen">
+        <WavyBackground 
+          // Paleta Tech: Laranja Neon, Laranja Escuro, Branco, Cinza e um toque de Rosa (lembrando Vice City)
+          colors={[
+            "#f97316", // orange-500
+            "#ea580c", // orange-600
+            "#ffffff", // white
+            "#52525b", // zinc-500
+            //"#ff007f", // neon pink sutil
+          ]}
+          backgroundFill="#000000" // Fundo totalmente preto para fundir com a seção
+          waveWidth={50} // Espessura da onda
+          blur={10} // Borrão para dar aspecto de "brilho/neon"
+          waveOpacity={0.5} // Opacidade das ondas em si
+        />
+      </div>
 
       <div
         ref={introOverlayRef}
