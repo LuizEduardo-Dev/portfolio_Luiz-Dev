@@ -5,11 +5,16 @@ import { gsap } from '@/lib/gsap';
 import { useGSAP } from '@gsap/react';
 import { Menu, X, Globe } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import { useLenis } from 'lenis/react';
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { lang, t, toggleLang } = useLanguage();
   const menuRef = useRef<HTMLDivElement>(null);
+  const lenis = useLenis();
+
+  // Guarda o destino do scroll sem causar re-renders
+  const pendingScroll = useRef<string | null>(null);
 
   useGSAP(() => {
     if (isOpen) {
@@ -29,11 +34,27 @@ export const Navbar = () => {
         duration: 0.6, 
         ease: "expo.inOut",
         onComplete: () => {
-           if (!isOpen) gsap.set(menuRef.current, { visibility: "hidden" });
+          gsap.set(menuRef.current, { visibility: "hidden" });
+
+          // Se houver um scroll pendente, dispara o Lenis exatamente após o fechamento
+          if (pendingScroll.current && lenis) {
+            lenis.scrollTo(`#${pendingScroll.current}`, { 
+              offset: 0,
+              duration: 1.5,
+              easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+            });
+            pendingScroll.current = null; // Limpa o estado
+          }
         }
       });
     }
-  }, [isOpen]);
+  }, [isOpen, lenis]);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault(); // Impede o pulo brusco padrão do HTML
+    pendingScroll.current = targetId; // Salva o destino
+    setIsOpen(false);   // Fecha o menu
+  };
 
   return (
     <>
@@ -59,7 +80,7 @@ export const Navbar = () => {
             <a 
               key={key} 
               href={`#${key}`}
-              onClick={() => setIsOpen(false)}
+              onClick={(e) => handleNavClick(e, key)}
               className="menu-item group flex items-center gap-6 text-5xl md:text-8xl font-anton uppercase italic text-white hover:text-orange-500 transition-all duration-300"
             >
               <span className="text-orange-500 font-mono text-lg not-italic opacity-40 group-hover:opacity-100">0{i + 1}</span>

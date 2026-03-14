@@ -31,7 +31,7 @@ export const ProjectCarousel = () => {
   }, { scope: triggerRef });
   return (
     /* 1. Definimos uma altura mínima para o trigger para evitar o CLS */
-    <section ref={triggerRef} className="overflow-hidden bg-black min-h-screen">
+    <section id="projects" ref={triggerRef} className="overflow-hidden bg-black min-h-screen">
       
       {/* 2. Container interno com flex-nowrap para garantir a linha única */}
       <div 
