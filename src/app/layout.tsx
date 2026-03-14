@@ -4,6 +4,7 @@ import "./globals.css";
 import { SmoothScroll } from "@/components/animations/SmoothScroll";
 import { CustomCursor } from "@/components/ui/customCursor";
 import { Navbar } from "@/components/ui/Navbar";
+import { LanguageProvider } from "@/context/LanguageContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -42,12 +43,14 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${anton.variable} ${inter.variable} antialiased`}
       >
         {/* <CustomCursor/> */}
-        <Navbar/>
-        <SmoothScroll>
-          <main>
-            {children}
-          </main>
-        </SmoothScroll>
+        <LanguageProvider>
+          <Navbar />
+          <SmoothScroll>
+            <main>
+              {children}
+            </main>
+          </SmoothScroll>
+        </LanguageProvider>
       </body>
     </html>
   );
