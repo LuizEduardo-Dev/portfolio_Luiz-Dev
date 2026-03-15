@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Anton, Inter } from "next/font/google";
 import "./globals.css";
 import { SmoothScroll } from "@/components/animations/SmoothScroll";
-import { CustomCursor } from "@/components/ui/customCursor";
+//import { CustomCursor } from "@/components/ui/customCursor";
 import { Navbar } from "@/components/ui/Navbar";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { BackToTop } from "@/components/ui/BackToTop";

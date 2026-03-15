@@ -87,7 +87,7 @@ export const ZoomExperience = () => {
       isDesktop: "(min-width: 768px)",
       isMobile: "(max-width: 767px)"
     }, (context) => {
-      const { isMobile } = context.conditions as any;
+      const { isMobile } = context.conditions as {isMobile: boolean, isDesktop: boolean};
 
       const scrollTl = gsap.timeline({
         scrollTrigger: {

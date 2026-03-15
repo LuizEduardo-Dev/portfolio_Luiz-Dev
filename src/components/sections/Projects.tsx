@@ -10,7 +10,7 @@ export const Projects = () => {
     const container = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
-        const cards = gsap.utils.toArray('.project-card');
+        const cards = gsap.utils.toArray<HTMLElement>('.project-card');
 
         const tl = gsap.timeline({
             scrollTrigger: {
@@ -23,7 +23,7 @@ export const Projects = () => {
             }
         });
 
-        cards.forEach((card: any, index) => {
+        cards.forEach((card, index) => {
             if (index === 0) return;
 
             // Criado um sub-timeline para cada card que entra

@@ -7,14 +7,14 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 export const SmoothScroll = ({ children }: { children: ReactNode }) => {
   // Esse hook dá acesso à instância do Lenis
-  useLenis((lenis) => {
+  useLenis(() => {
     // Sincroniza o ScrollTrigger a cada frame de scroll do Lenis
     ScrollTrigger.update();
   });
 
   useEffect(() => {
     // Adiciona o Lenis no Ticker do GSAP para sincronizar o tempo das animações
-    const update = (time: number) => {
+    const update = () => {
       // O Lenis lida com seu próprio RAF, mas o GSAP precisa saber
       // para evitar o "jittering" (trepidação) que causa CLS
       ScrollTrigger.refresh();

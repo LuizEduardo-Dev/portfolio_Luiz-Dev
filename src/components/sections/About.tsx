@@ -12,9 +12,9 @@ export const About = () => {
 
   // Dados da Timeline (Os textos reais vêm do LanguageContext)
   const timelineEvents = [
-    { year: "2024", titleKey: "timeline24Title", descKey: "timeline24Desc" },
-    { year: "2025", titleKey: "timeline25Title", descKey: "timeline25Desc" },
-    { year: "2026", titleKey: "timeline26Title", descKey: "timeline26Desc" }
+      { year: "2024", titleKey: "timeline24Title" as const, descKey: "timeline24Desc" as const },
+    { year: "2025", titleKey: "timeline25Title" as const, descKey: "timeline25Desc" as const },
+    { year: "2026", titleKey: "timeline26Title" as const, descKey: "timeline26Desc" as const }
   ];
 
   useGSAP(() => {
