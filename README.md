@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ⚡ Luiz Eduardo | Interactive Portfolio V2.026
 
-## Getting Started
+![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)
+![React](https://img.shields.io/badge/React-19-blue?style=for-the-badge&logo=react)
+![GSAP](https://img.shields.io/badge/GSAP-Animations-88CE02?style=for-the-badge&logo=greensock)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=for-the-badge&logo=tailwind-css)
+![TypeScript](https://img.shields.io/badge/TypeScript-Ready-3178C6?style=for-the-badge&logo=typescript)
 
-First, run the development server:
+Um portfólio interativo e de alta performance construído com o ecossistema moderno do React. O foco deste projeto é unir engenharia de software robusta (Server-Side Rendering, Route Handlers) com uma experiência de usuário premium, utilizando animações imersivas e arquitetura escalável.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🎯 Destaques do Projeto
+
+* **Animações de Alta Performance:** Utilização de `GSAP` e `Lenis` para Virtual Scroll e animações sincronizadas com a rolagem (ScrollTrigger), operando a 60 FPS com manipulação direta no DOM.
+* **Zero FOUC (Flash of Unstyled Content):** Lógica arquitetada para evitar transições bruscas durante o carregamento do CSS e execução do JavaScript inicial.
+* **i18n Nativo (Context API):** Sistema de internacionalização (PT/EN) construído do zero utilizando React Context, permitindo troca de idioma em tempo real sem recarregamento da página.
+* **Segurança & Anti-Spam:** Proteção de dados sensíveis (PII). O link de contato do WhatsApp é protegido por um *Next.js Route Handler* (API dinâmica), ocultando o número do cliente de bots de *web scraping*.
+* **Componentes Procedurais:** Fundo animado (Cyber Waves/Tech Grid) gerado via código (CSS/Canvas) substituindo assets pesados de imagem, reduzindo o *Largest Contentful Paint (LCP)* para perto de zero.
+
+## 🛠️ Tecnologias Utilizadas
+
+* **Framework:** Next.js (App Router)
+* **Linguagem:** TypeScript
+* **Estilização:** Tailwind CSS + Aceternity UI
+* **Animações:** GSAP (ScrollTrigger, MatchMedia) + React Lenis (Smooth Scroll)
+* **Ícones:** Lucide React
+
+## ⚙️ Arquitetura e Decisões Técnicas
+
+1.  **Event-Driven UI:** O fluxo de navegação (como o fechamento do menu acionando o scroll) é manipulado deterministicamente através do evento `onComplete` do GSAP associado a `useRefs`, evitando vazamentos de memória e *code smells* como `setTimeout`.
+2.  **Server vs Client Components:** Divisão clara entre componentes interativos (`"use client"`) e rotas otimizadas estaticamente (`"use server"`), maximizando a entrega CDN da Vercel.
+
+## 🚀 Como rodar o projeto localmente
+
+### 1. Clone o repositório
+```
+git clone [https://github.com/SeuUsuario/myportfolio.git](https://github.com/SeuUsuario/myportfolio.git)
+cd myportfolio
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Instale as dependências
+```
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Configuração de Variáveis de Ambiente
+Crie um arquivo `.env.local` na raiz do projeto e adicione a seguinte variável (necessária para a API de redirecionamento do WhatsApp funcionar):
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Code snippet
+`WHATSAPP_NUMBER=5511999999999`
 
-## Learn More
+### 4. Execute o servidor de desenvolvimento
+````Bash
+npm run dev
+````
 
-To learn more about Next.js, take a look at the following resources:
+### 4. Entrando no Portfólio  
+Acesse `http://localhost:3000` no seu navegador para ver o resultado.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+Architecting Digital Solutions — Desenvolvido por Luiz Eduardo.
