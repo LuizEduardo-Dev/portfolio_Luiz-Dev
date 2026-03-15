@@ -18,27 +18,27 @@ export const Navbar = () => {
 
   useGSAP(() => {
     if (isOpen) {
-      gsap.to(menuRef.current, { 
-        clipPath: "circle(150% at 95% 5%)", 
+      gsap.to(menuRef.current, {
+        clipPath: "circle(150% at 95% 5%)",
         visibility: "visible", // Força a visibilidade
-        duration: 0.8, 
-        ease: "expo.inOut" 
+        duration: 0.8,
+        ease: "expo.inOut"
       });
-      gsap.fromTo(".menu-item", 
-        { y: 50, opacity: 0 }, 
+      gsap.fromTo(".menu-item",
+        { y: 50, opacity: 0 },
         { y: 0, opacity: 1, stagger: 0.1, duration: 0.6, delay: 0.3, ease: "power4.out" }
       );
     } else {
-      gsap.to(menuRef.current, { 
-        clipPath: "circle(0% at 95% 5%)", 
-        duration: 0.6, 
+      gsap.to(menuRef.current, {
+        clipPath: "circle(0% at 95% 5%)",
+        duration: 0.6,
         ease: "expo.inOut",
         onComplete: () => {
           gsap.set(menuRef.current, { visibility: "hidden" });
 
           // Se houver um scroll pendente, dispara o Lenis exatamente após o fechamento
           if (pendingScroll.current && lenis) {
-            lenis.scrollTo(`#${pendingScroll.current}`, { 
+            lenis.scrollTo(`#${pendingScroll.current}`, {
               offset: 0,
               duration: 1.5,
               easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
@@ -59,7 +59,7 @@ export const Navbar = () => {
   return (
     <>
       {/* Botão Hambúrguer - Z-index mais alto do site */}
-      <button 
+      <button
         onClick={() => setIsOpen(!isOpen)}
         className="fixed top-6 right-6 z-[999] p-4 bg-zinc-900/50 backdrop-blur-xl border border-white/10 rounded-xl text-white shadow-2xl"
       >
@@ -67,7 +67,7 @@ export const Navbar = () => {
       </button>
 
       {/* Overlay do Menu - Z-index abaixo apenas do botão */}
-      <div 
+      <div
         ref={menuRef}
         className="fixed inset-0 z-[998] bg-zinc-950 flex items-center justify-center invisible overflow-hidden"
         style={{ clipPath: "circle(0% at 95% 5%)" }}
@@ -77,22 +77,22 @@ export const Navbar = () => {
 
         <nav className="relative z-10 w-full flex flex-col items-center justify-center gap-8 md:gap-12">
           {Object.entries(t.nav).map(([key, value], i) => (
-            <a 
-              key={key} 
+            <a
+              key={key}
               href={`#${key}`}
               onClick={(e) => handleNavClick(e, key)}
-              className="menu-item group flex items-center gap-6 text-5xl md:text-8xl font-anton uppercase italic text-white hover:text-orange-500 transition-all duration-300"
-            >
-              <span className="text-orange-500 font-mono text-lg not-italic opacity-40 group-hover:opacity-100">0{i + 1}</span>
+              className="menu-item group flex items-center gap-3 md:gap-6 text-[11vw] sm:text-5xl md:text-7xl lg:text-8xl font-anton uppercase italic text-white hover:text-orange-500 transition-all duration-300 whitespace-nowrap"            >
+              <span className="text-orange-500 font-mono text-sm md:text-lg not-italic opacity-40 group-hover:opacity-100">0{i + 1}</span>
               {value}
             </a>
           ))}
 
-          <button 
+          <button
             onClick={toggleLang}
-            className="menu-item mt-10 flex items-center gap-3 px-8 py-3 bg-white/5 border border-white/10 rounded-full text-white font-mono text-[10px] uppercase tracking-[0.3em] hover:bg-orange-500 hover:border-orange-500 transition-all"
+            // Aumentei o padding vertical de py-3 para py-4 no mobile para facilitar o toque
+            className="menu-item mt-8 md:mt-10 flex items-center gap-3 px-8 py-4 md:py-3 bg-white/5 border border-white/10 rounded-full text-white font-mono text-[10px] md:text-xs uppercase tracking-[0.3em] hover:bg-orange-500 hover:border-orange-500 transition-all active:scale-95"
           >
-            <Globe size={14} />
+            <Globe size={16} />
             {lang === 'pt' ? "English Version" : "Versão Português"}
           </button>
         </nav>

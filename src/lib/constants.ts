@@ -4,21 +4,24 @@ export const PROJECTS = [
     title: "HelpDesk", 
     desc: "Sistema completo com Java / Angular", 
     color: "bg-zinc-900",
-    tech: ["Java", "Spring", "Angular", "PostgreSQL"] 
+    tech: ["Java", "Spring", "Angular", "PostgreSQL"],
+    link: ""
   },
   { 
     id: 2,
     title: "HardwareHub", 
     desc: "E-commerce de Hardware de Alta Performance", 
     color: "bg-zinc-800",
-    tech: ["Next.js", "Tailwind", "Prisma"]
+    tech: ["Next.js", "Tailwind", "Prisma"],
+    link: ""
   },
   { 
     id: 3,
     title: "FinSense", 
     desc: "Dashboard de Gestão Financeira", 
     color: "bg-zinc-700",
-    tech: ["React", "Node.js", "GSAP"]
+    tech: ["React", "Node.js", "GSAP"],
+    link: ""
   },
 ];
 

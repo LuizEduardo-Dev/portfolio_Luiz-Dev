@@ -22,7 +22,7 @@ export const ZoomExperience = () => {
 
   const { t } = useLanguage();
   const lenis = useLenis();
-  
+
   //  ESTADO PARA CONTROLAR O SCROLL
   const [isBooting, setIsBooting] = useState(true);
 
@@ -63,31 +63,31 @@ export const ZoomExperience = () => {
       { autoAlpha: 0, filter: "blur(10px)", y: 20 },
       { autoAlpha: 1, filter: "blur(0px)", y: 0, duration: 1 }
     )
-    .to(counter, {
-      val: 100,
-      duration: 3.5,
-      ease: "power2.inOut",
-      onUpdate: () => {
-        if (percentRef.current) percentRef.current.innerText = `${Math.floor(counter.val)}%`;
-      }
-    }, "<")
-    .to(".loading-bar", {
-      x: "0%", 
-      duration: 3.5, 
-      ease: "power2.inOut"
-    }, "<")
-    .to(introOverlayRef.current, {
-      autoAlpha: 0,
-      duration: 1,
-      ease: "power2.inOut"
-    });
+      .to(counter, {
+        val: 100,
+        duration: 3.5,
+        ease: "power2.inOut",
+        onUpdate: () => {
+          if (percentRef.current) percentRef.current.innerText = `${Math.floor(counter.val)}%`;
+        }
+      }, "<")
+      .to(".loading-bar", {
+        x: "0%",
+        duration: 3.5,
+        ease: "power2.inOut"
+      }, "<")
+      .to(introOverlayRef.current, {
+        autoAlpha: 0,
+        duration: 1,
+        ease: "power2.inOut"
+      });
 
     // 2. TIMELINE DE SCROLL
     mm.add({
       isDesktop: "(min-width: 768px)",
       isMobile: "(max-width: 767px)"
     }, (context) => {
-      const { isMobile } = context.conditions as {isMobile: boolean, isDesktop: boolean};
+      const { isMobile } = context.conditions as { isMobile: boolean, isDesktop: boolean };
 
       const scrollTl = gsap.timeline({
         scrollTrigger: {
@@ -99,53 +99,54 @@ export const ZoomExperience = () => {
         }
       });
 
-      scrollTl.to(contentRef.current, { 
-        autoAlpha: 1, 
-        duration: 0.5 
+      scrollTl.to(contentRef.current, {
+        autoAlpha: 1,
+        duration: 0.5
       })
-      .fromTo(maskRef.current,
-        { scale: isMobile ? 10 : 25, opacity: 0 }, 
-        { scale: 1, opacity: 1, duration: 2, ease: "power2.inOut" }
-      )
-      .fromTo(whiteFillRef.current,
-        { yPercent: 100 },
-        { yPercent: 0, duration: 1, ease: "power1.inOut" },
-        "-=0.5"
-      )
-      .to(contentRef.current, {
-        scale: isMobile ? 0.5 : 0.35,
-        y: isMobile ? "-40vh" : "-38vh",
-        duration: 1.5,
-        ease: "power3.inOut"
-      })
-      .to(subTextRef.current, {
-        autoAlpha: 1, 
-        y: 0,
-        duration: 2 
-      }, "+=0.5");
+        .fromTo(maskRef.current,
+          { scale: isMobile ? 10 : 25, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 2, ease: "power2.inOut" }
+        )
+        .fromTo(whiteFillRef.current,
+          { yPercent: 100 },
+          { yPercent: 0, duration: 1, ease: "power1.inOut" },
+          "-=0.5"
+        )
+        .to(contentRef.current, {
+          scale: isMobile ? 0.5 : 0.35,
+          y: isMobile ? "-40vh" : "-38vh",
+          duration: 1.5,
+          ease: "power3.inOut"
+        })
+        .to(subTextRef.current, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 2
+        }, "+=0.5");
 
-      return () => {};
+      return () => { };
     });
 
   }, { scope: container }); // Removemos a dependência do Lenis daqui!
 
   return (
-    <section ref={container} className="relative h-screen w-full overflow-hidden bg-black grainy-bg">
+    <section ref={container} className="relative h-[100vh] w-full overflow-hidden bg-black grainy-bg">
 
-    <div className="absolute inset-0 z-0 opacity-60 pointer-events-none mix-blend-screen">
-        <WavyBackground 
+      <div className="absolute inset-0 z-0 opacity-60 pointer-events-none">
+        <WavyBackground
           // Paleta Tech: Laranja Neon, Laranja Escuro, Branco, Cinza e um toque de Rosa (lembrando Vice City)
           colors={[
             "#f97316", // orange-500
             "#ea580c", // orange-600
             "#ffffff", // white
             "#52525b", // zinc-500
-            //"#ff007f", // neon pink sutil
+            "#ff007f", // neon pink sutil
           ]}
           backgroundFill="#000000" // Fundo totalmente preto para fundir com a seção
-          waveWidth={50} // Espessura da onda
-          blur={10} // Borrão para dar aspecto de "brilho/neon"
-          waveOpacity={0.5} // Opacidade das ondas em si
+          waveWidth={30} // Espessura da onda
+          blur={0} // Borrão para dar aspecto de "brilho/neon"
+          speed='fast' // Velocidade das ondas
+          waveOpacity={0.6} // Opacidade das ondas em si
         />
       </div>
 
@@ -198,8 +199,10 @@ export const ZoomExperience = () => {
         </div>
       </div>
 
+      {/* SUBTEXTOS */}
       <div ref={subTextRef} className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none pt-20 opacity-0 invisible">
-        <p className="text-white font-anton text-2xl md:text-4xl tracking-widest uppercase mt-40 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">
+
+        <p className="text-white font-anton text-2xl md:text-4xl tracking-widest uppercase mt-16 md:mt-40 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] text-center px-4">
           {t.heroSubtitle}
         </p>
         <p className="text-orange-500 font-mono text-[10px] tracking-[0.5em] mt-4 uppercase animate-pulse">

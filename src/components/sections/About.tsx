@@ -12,17 +12,17 @@ export const About = () => {
 
   // Dados da Timeline (Os textos reais vêm do LanguageContext)
   const timelineEvents = [
-      { year: "2024", titleKey: "timeline24Title" as const, descKey: "timeline24Desc" as const },
+    { year: "2024", titleKey: "timeline24Title" as const, descKey: "timeline24Desc" as const },
     { year: "2025", titleKey: "timeline25Title" as const, descKey: "timeline25Desc" as const },
     { year: "2026", titleKey: "timeline26Title" as const, descKey: "timeline26Desc" as const }
   ];
 
   useGSAP(() => {
     // 1. Anima a linha central "descendo" conforme o scroll
-    gsap.fromTo(lineRef.current, 
+    gsap.fromTo(lineRef.current,
       { scaleY: 0 },
-      { 
-        scaleY: 1, 
+      {
+        scaleY: 1,
         ease: "none",
         scrollTrigger: {
           trigger: container.current,
@@ -52,11 +52,11 @@ export const About = () => {
 
   return (
     <section id="about" ref={container} className="relative min-h-screen w-full bg-zinc-950 py-32 px-6 md:px-20 overflow-hidden grainy-bg">
-      
+
       {/* Título da Seção */}
       <div className="max-w-4xl mx-auto mb-20">
         <h2 className="text-orange-500 font-mono text-sm tracking-[0.5em] uppercase mb-4 opacity-70">
-           {t.aboutSubtitle}
+          {t.aboutSubtitle}
         </h2>
         <h3 className="text-white font-anton text-5xl md:text-7xl uppercase italic">
           {t.aboutTitle}
@@ -68,18 +68,17 @@ export const About = () => {
 
       {/* Container da Timeline */}
       <div className="relative max-w-4xl mx-auto pl-4 md:pl-10">
-        
+
         {/* A Linha Vertical (Fibra Ótica) */}
         <div className="absolute top-0 left-[15px] md:left-[39px] w-[2px] h-full bg-white/10 origin-top">
-           {/* A linha laranja que "preenche" via GSAP */}
-           <div ref={lineRef} className="w-full h-full bg-orange-500 origin-top shadow-[0_0_15px_#f97316]" />
+          {/* A linha laranja que "preenche" via GSAP */}
+          <div ref={lineRef} className="w-full h-full bg-orange-500 origin-top shadow-[0_0_15px_#f97316]" />
         </div>
 
         {/* Itens da Timeline */}
         <div className="flex flex-col gap-12">
           {timelineEvents.map((item, index) => (
-            <div key={index} className="timeline-item relative pl-10 md:pl-16 group cursor-pointer">
-              
+            <div key={index} className="timeline-item relative pl-10 md:pl-16 group cursor-pointer active:scale-[0.98] transition-transform md:active:scale-100">
               {/* O Ponto (Dot) na linha */}
               <div className="absolute left-[-5px] md:left-[-1px] top-2 w-3 h-3 rounded-full bg-zinc-900 border-2 border-orange-500 group-hover:bg-orange-500 group-hover:shadow-[0_0_10px_#f97316] transition-all duration-300 z-10" />
 
@@ -89,7 +88,7 @@ export const About = () => {
                   {item.year}
                 </span>
                 <h4 className="text-white text-xl md:text-2xl font-anton uppercase tracking-wide group-hover:text-orange-400 transition-colors">
-                  
+
                   {t[item.titleKey]}
                 </h4>
               </div>
@@ -98,7 +97,7 @@ export const About = () => {
               <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-in-out">
                 <div className="overflow-hidden">
                   <p className="text-zinc-400 font-inter mt-4 leading-relaxed max-w-2xl border-l border-white/10 pl-4 py-2">
-                    
+
                     {t[item.descKey]}
                   </p>
                 </div>

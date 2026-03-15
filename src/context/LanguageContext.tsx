@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const translations = {
   pt: {
@@ -72,13 +72,52 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export const LanguageProvider = ({ children }: { children: ReactNode }) => {
+export const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
   const [lang, setLang] = useState<Language>('pt');
+  
+  const [isMounted, setIsMounted] = useState(false);
 
-  const toggleLang = () => setLang((prev) => (prev === 'pt' ? 'en' : 'pt'));
+  useEffect(() => {
+    // 1. O site carregou. Vamos olhar o Local Storage primeiro.
+    const storedLang = localStorage.getItem('portfolio_lang') as Language;
+    
+    if (storedLang && (storedLang === 'pt' || storedLang === 'en')) {
+      // Se o usuário já escolheu antes, respeitamos a escolha dele
+      setLang(storedLang);
+    } else {
+      // 2. Se é a primeira vez, olhamos o idioma do navegador
+      const browserLang = navigator.language.toLowerCase();
+      // Se o navegador estiver em inglês (en-US, en-GB, etc), mudamos para 'en'
+      if (browserLang.startsWith('en')) {
+        setLang('en');
+        localStorage.setItem('portfolio_lang', 'en'); // Já salva a decisão
+      } else {
+        localStorage.setItem('portfolio_lang', 'pt'); // Salva PT como default
+      }
+    }
+    
+    // Libera a renderização do site agora que sabemos a língua certa
+    setIsMounted(true);
+  }, []);
+
+  const toggleLang = () => {
+    setLang((prev) => {
+      const newLang = prev === 'pt' ? 'en' : 'pt';
+      localStorage.setItem('portfolio_lang', newLang);
+      return newLang;
+    });
+  };
+
+  const t = translations[lang];
+
+  // Enquanto não descobre a língua (fração de segundo), mostra uma tela preta 
+  // que se mistura perfeitamente com o começo do seu Boot System.
+  if (!isMounted) {
+    return <div className="min-h-screen w-full bg-black" />;
+  }
 
   return (
-    <LanguageContext.Provider value={{ lang, t: translations[lang], toggleLang }}>
+    <LanguageContext.Provider value={{ lang, t, toggleLang }}>
       {children}
     </LanguageContext.Provider>
   );
@@ -86,6 +125,6 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
 
 export const useLanguage = () => {
   const context = useContext(LanguageContext);
-  if (!context) throw new Error('useLanguage deve ser usado dentro de um LanguageProvider');
+  if (!context) throw new Error('useLanguage must be used within LanguageProvider');
   return context;
 };
