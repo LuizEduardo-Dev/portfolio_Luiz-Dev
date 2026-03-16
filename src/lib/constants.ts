@@ -5,6 +5,8 @@ export const PROJECTS = [
     desc: "Sistema completo com Java / Angular", 
     color: "bg-zinc-900",
     tech: ["Java", "Spring", "Angular", "PostgreSQL"],
+    image: "/helpdesktest.jpg",
+    comingSoon: false,
     link: ""
   },
   { 
@@ -13,7 +15,9 @@ export const PROJECTS = [
     desc: "E-commerce de Hardware de Alta Performance", 
     color: "bg-zinc-800",
     tech: ["Next.js", "Tailwind", "Prisma"],
-    link: ""
+    image: "",
+    comingSoon: true,
+    link: "#"
   },
   { 
     id: 3,
@@ -21,7 +25,9 @@ export const PROJECTS = [
     desc: "Dashboard de Gestão Financeira", 
     color: "bg-zinc-700",
     tech: ["React", "Node.js", "GSAP"],
-    link: ""
+    image: "",
+    comingSoon: true,
+    link: "#"
   },
 ];
 
