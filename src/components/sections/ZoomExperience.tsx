@@ -47,7 +47,7 @@ export const ZoomExperience = () => {
 
   //  FIX 2: O GSAP roda APENAS UMA VEZ (sem dependências)
   useGSAP(() => {
-    const mm = gsap.matchMedia();
+    const match = gsap.matchMedia();
 
     // 1. TELA DE BOOT
     const bootTl = gsap.timeline({
@@ -76,14 +76,32 @@ export const ZoomExperience = () => {
         duration: 3.5,
         ease: "power2.inOut"
       }, "<")
+
       .to(introOverlayRef.current, {
         autoAlpha: 0,
         duration: 1,
         ease: "power2.inOut"
-      });
+      })
+      .fromTo(document.getElementById("nav-toggle"),
+        {
+          autoAlpha: 0,
+          scale: 0.9,
+          boxShadow: "0px 0px 0px 0px rgba(249, 115, 22, 0)",
+          borderColor: "rgba(255, 255, 255, 0.1)" // Borda padrão apagada
+        },
+        {
+          autoAlpha: 1,
+          scale: 1,
+          boxShadow: "0px 0px 20px 2px rgba(249, 115, 22, 0.4)", // Brilho neon suave e fixo
+          borderColor: "rgba(249, 115, 22, 0.5)", // A borda "acende" em laranja
+          duration: 1.5, // Duração mais longa para dar o efeito de fade-in luxuoso
+          ease: "power2.out"
+        },
+        "-=0.3" // Inicia de forma sutil quase no fim da transição da tela preta
+      );
 
     // 2. TIMELINE DE SCROLL
-    mm.add({
+    match.add({
       isDesktop: "(min-width: 768px)",
       isMobile: "(max-width: 767px)"
     }, (context) => {
@@ -127,7 +145,7 @@ export const ZoomExperience = () => {
       return () => { };
     });
 
-  }, { scope: container }); // Removemos a dependência do Lenis daqui!
+  }, { scope: container });
 
   return (
     <section ref={container} className="relative h-[100vh] w-full overflow-hidden bg-black grainy-bg">

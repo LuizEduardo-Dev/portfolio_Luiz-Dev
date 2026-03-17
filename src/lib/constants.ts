@@ -2,17 +2,19 @@ export const PROJECTS = [
   { 
     id: 1,
     title: "HelpDesk", 
-    desc: "Sistema completo com Java / Angular", 
+    descPt: "Sistema completo com Java / Angular", 
+    descEn: "complete system with Java / Angular", 
     color: "bg-zinc-900",
     tech: ["Java", "Spring", "Angular", "PostgreSQL"],
-    image: "/helpdesktest.jpg",
-    comingSoon: false,
+    image: "",
+    comingSoon: true,
     link: ""
   },
   { 
     id: 2,
     title: "HardwareHub", 
-    desc: "E-commerce de Hardware de Alta Performance", 
+    descPt: "E-commerce de Hardware de Alta Performance",
+    descEn: "High-performance hardware e-commerce",
     color: "bg-zinc-800",
     tech: ["Next.js", "Tailwind", "Prisma"],
     image: "",
@@ -22,9 +24,10 @@ export const PROJECTS = [
   { 
     id: 3,
     title: "FinSense", 
-    desc: "Dashboard de Gestão Financeira", 
+    descPt: "Dashboard de Gestão Financeira",
+    descEn: "Financial management dashboard",
     color: "bg-zinc-700",
-    tech: ["React", "Node.js", "GSAP"],
+    tech: ["React", "Node.js", "PostgreSQL"],
     image: "",
     comingSoon: true,
     link: "#"

@@ -6,6 +6,7 @@ import { useGSAP } from '@gsap/react';
 import PROJECTS from '@/lib/constants';
 import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
+import { Lock } from 'lucide-react';
 
 export const ProjectCarousel = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -72,7 +73,7 @@ export const ProjectCarousel = () => {
 
       <div 
         ref={sectionRef} 
-        //  O SEGREDO DO CSS: No mobile é flex-col (vertical), no md é flex-row (horizontal)
+        
         className="flex flex-col md:flex-row md:h-screen items-center md:px-[5vw] w-full md:w-fit gap-10 md:gap-0 px-4 pb-20 md:pb-0 will-change-transform"
       >
         {PROJECTS.map((project, i) => (
@@ -120,7 +121,7 @@ export const ProjectCarousel = () => {
               <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
                 <div className="max-w-xs">
                   <p className="text-zinc-500 text-xs uppercase tracking-[0.2em] mb-2 font-bold">Tech Stack</p>
-                  <p className="text-white font-medium text-base md:text-lg uppercase line-clamp-2">{project.desc}</p>
+                  <p className="text-white font-medium text-base md:text-lg uppercase line-clamp-2">{lang ==='pt' ? project.descPt : project.descEn}</p>
                 </div>
                 
                 {/*  ACESSIBILIDADE MOBILE: Botões w-full no celular para facilitar o clique */}
@@ -136,7 +137,7 @@ export const ProjectCarousel = () => {
                 ) : (
                   <div className="px-6 py-4 bg-white/5 border border-white/10 text-white/30 font-bold uppercase text-xs md:text-sm rounded-none -skew-x-12 cursor-not-allowed inline-block backdrop-blur-md w-full md:w-auto text-center">
                     <div className="skew-x-12 flex items-center justify-center gap-2">
-                      <span>🔒</span> 
+                      <span><Lock/></span> 
                       {lang === 'pt' ? 'Bloqueado' : 'Locked'}
                     </div>
                   </div>

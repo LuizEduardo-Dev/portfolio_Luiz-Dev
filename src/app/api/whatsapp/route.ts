@@ -4,7 +4,7 @@ export async function GET() {
   // Lê a variável de ambiente diretamente do servidor Node.js
   const phoneNumber = process.env.WHATSAPP_NUMBER;
   
-  // Mensagem padrão (pode ser genérica aqui, já que não temos o i18n no backend de forma fácil)
+  // Mensagem padrão
   const message = encodeURIComponent("Olá Luiz! Vi seu portfólio e gostaria de conversar.");
 
   if (!phoneNumber) {

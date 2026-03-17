@@ -10,13 +10,6 @@ export const About = () => {
   const lineRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
 
-  // Dados da Timeline (Os textos reais vêm do LanguageContext)
-  const timelineEvents = [
-    { year: "2024", titleKey: "timeline24Title" as const, descKey: "timeline24Desc" as const },
-    { year: "2025", titleKey: "timeline25Title" as const, descKey: "timeline25Desc" as const },
-    { year: "2026", titleKey: "timeline26Title" as const, descKey: "timeline26Desc" as const }
-  ];
-
   useGSAP(() => {
     // 1. Anima a linha central "descendo" conforme o scroll
     gsap.fromTo(lineRef.current,
@@ -51,7 +44,7 @@ export const About = () => {
   }, { scope: container });
 
   return (
-    <section id="about" ref={container} className="relative min-h-screen w-full bg-zinc-950 py-32 px-6 md:px-20 overflow-hidden grainy-bg">
+    <section id="about" ref={container} className="relative min-h-screen w-full bg-zinc-950 py-32 px-6 md:px-20 overflow-hidden">
 
       {/* Título da Seção */}
       <div className="max-w-4xl mx-auto mb-20">
@@ -77,30 +70,31 @@ export const About = () => {
 
         {/* Itens da Timeline */}
         <div className="flex flex-col gap-12">
-          {timelineEvents.map((item, index) => (
+          {t.timeline.map((item, index) => (
             <div key={index} className="timeline-item relative pl-10 md:pl-16 group cursor-pointer active:scale-[0.98] transition-transform md:active:scale-100">
-              {/* O Ponto (Dot) na linha */}
-              <div className="absolute left-[-5px] md:left-[-1px] top-2 w-3 h-3 rounded-full bg-zinc-900 border-2 border-orange-500 group-hover:bg-orange-500 group-hover:shadow-[0_0_10px_#f97316] transition-all duration-300 z-10" />
 
-              {/* Cabeçalho do Item (Ano e Título) */}
+              <div className="absolute left-[-5px] md:left-[-1px] top-2 w-3 h-3">
+
+                <div className="absolute inset-0 rounded-full bg-zinc-900 border-2 border-orange-500 group-hover:bg-orange-500 transition-colors duration-300" />
+
+                <div className="absolute inset-[-4px] rounded-full bg-orange-500 blur-[6px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+              </div>
+
               <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
                 <span className="text-orange-500 font-mono text-xl md:text-2xl font-bold">
                   {item.year}
                 </span>
                 <h4 className="text-white text-xl md:text-2xl font-anton uppercase tracking-wide group-hover:text-orange-400 transition-colors">
-
-                  {t[item.titleKey]}
+                  {item.title}
                 </h4>
               </div>
 
-              {/*  O TRUQUE DE MESTRE: Descrição Expansível (Grid Transition) */}
-              <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-in-out">
-                <div className="overflow-hidden">
-                  <p className="text-zinc-400 font-inter mt-4 leading-relaxed max-w-2xl border-l border-white/10 pl-4 py-2">
 
-                    {t[item.descKey]}
-                  </p>
-                </div>
+              <div className="max-h-0 opacity-0 group-hover:max-h-[300px] group-hover:opacity-100 transition-all duration-500 ease-out will-change-[max-height,opacity] overflow-hidden">
+                <p className="text-zinc-400 font-inter mt-4 leading-relaxed max-w-2xl border-l border-white/10 pl-4 py-2">
+                  {item.desc}
+                </p>
               </div>
 
             </div>

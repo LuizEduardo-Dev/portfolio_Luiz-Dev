@@ -6,10 +6,11 @@ import { useGSAP } from '@gsap/react';
 import { Menu, X, Globe } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 import { useLenis } from 'lenis/react';
+import { translations } from '@/context/LanguageContext';
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { lang, t, toggleLang } = useLanguage();
+  const { lang, toggleLang } = useLanguage();
   const menuRef = useRef<HTMLDivElement>(null);
   const lenis = useLenis();
 
@@ -60,8 +61,9 @@ export const Navbar = () => {
     <>
       {/* Botão Hambúrguer - Z-index mais alto do site */}
       <button
+        id='nav-toggle'
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed top-6 right-6 z-[999] p-4 bg-zinc-900/50 backdrop-blur-xl border border-white/10 rounded-xl text-white shadow-2xl"
+        className="fixed top-6 right-6 z-[999] p-4 bg-zinc-900/50 backdrop-blur-xl border border-white/10 rounded-xl text-white shadow-2xl opacity-0 invisible"
       >
         {isOpen ? <X size={24} /> : <Menu size={24} />}
       </button>
@@ -76,24 +78,61 @@ export const Navbar = () => {
         <div className="absolute inset-0 tech-grid opacity-20" />
 
         <nav className="relative z-10 w-full flex flex-col items-center justify-center gap-8 md:gap-12">
-          {Object.entries(t.nav).map(([key, value], i) => (
+          {(Object.keys(translations.pt.nav) as Array<keyof typeof translations.pt.nav>).map((key, i) => (
             <a
               key={key}
               href={`#${key}`}
               onClick={(e) => handleNavClick(e, key)}
-              className="menu-item group flex items-center gap-3 md:gap-6 text-[11vw] sm:text-5xl md:text-7xl lg:text-8xl font-anton uppercase italic text-white hover:text-orange-500 transition-all duration-300 whitespace-nowrap"            >
-              <span className="text-orange-500 font-mono text-sm md:text-lg not-italic opacity-40 group-hover:opacity-100">0{i + 1}</span>
-              {value}
+              className="menu-item group flex items-center gap-3 md:gap-6 text-[11vw] sm:text-5xl md:text-7xl lg:text-8xl font-anton uppercase italic text-white hover:text-orange-500 transition-colors duration-300 whitespace-nowrap"
+            >
+              <span className="text-orange-500 font-mono text-sm md:text-lg not-italic opacity-40 group-hover:opacity-100 transition-opacity">
+                0{i + 1}
+              </span>
+
+              <span className="relative inline-grid overflow-hidden pb-2">
+                {/* Texto em Português */}
+                <span
+                  className={`col-start-1 row-start-1 transition-transform duration-500 ease-[cubic-bezier(0.87,0,0.13,1)] ${lang === 'pt' ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
+                    }`}
+                >
+                  {translations.pt.nav[key]}
+                </span>
+
+                {/* Texto em Inglês */}
+                <span
+                  className={`col-start-1 row-start-1 transition-transform duration-500 ease-[cubic-bezier(0.87,0,0.13,1)] ${lang === 'en' ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
+                    }`}
+                >
+                  {translations.en.nav[key]}
+                </span>
+              </span>
             </a>
           ))}
 
           <button
             onClick={toggleLang}
-            // Aumentei o padding vertical de py-3 para py-4 no mobile para facilitar o toque
-            className="menu-item mt-8 md:mt-10 flex items-center gap-3 px-8 py-4 md:py-3 bg-white/5 border border-white/10 rounded-full text-white font-mono text-[10px] md:text-xs uppercase tracking-[0.3em] hover:bg-orange-500 hover:border-orange-500 transition-all active:scale-95"
+
+            className="menu-item mt-8 md:mt-10 flex items-center justify-center gap-3 w-[260px] md:w-[280px] py-4 md:py-3 bg-white/5 border border-white/10 rounded-full text-white font-mono text-[10px] md:text-xs uppercase tracking-[0.3em] hover:bg-orange-500 hover:border-orange-500 transition-all active:scale-95"
           >
-            <Globe size={16} />
-            {lang === 'pt' ? "English Version" : "Versão Português"}
+            <Globe size={16} className="shrink-0" />
+
+            <div className="relative w-[180px] md:w-[200px] h-[16px] overflow-hidden flex items-center">
+
+              <span
+                className={`absolute inset-0 flex items-center justify-center whitespace-nowrap transition-transform duration-500 ease-[cubic-bezier(0.87,0,0.13,1)] ${lang === 'pt' ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'
+                  }`}
+              >
+                English Version
+              </span>
+
+              <span
+                className={`absolute inset-0 flex items-center justify-center whitespace-nowrap transition-transform duration-500 ease-[cubic-bezier(0.87,0,0.13,1)] ${lang === 'en' ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'
+                  }`}
+              >
+                Versão Português
+              </span>
+
+            </div>
           </button>
         </nav>
       </div>
