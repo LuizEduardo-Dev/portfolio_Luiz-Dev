@@ -13,10 +13,10 @@ export const PROJECTS = [
   { 
     id: 2,
     title: "HardwareHub", 
-    descPt: "E-commerce de Hardware de Alta Performance",
-    descEn: "High-performance hardware e-commerce",
+    descPt: "Plataforma de Análise e Benchmarking.",
+    descEn: "Hardware Analysis & Benchmarking Platform",
     color: "bg-zinc-800",
-    tech: ["Next.js", "Tailwind", "Prisma"],
+    tech: ["Next.js", "Tailwind", "Redis",],
     image: "",
     comingSoon: true,
     link: "#"
