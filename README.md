@@ -37,7 +37,7 @@ git clone [https://github.com/SeuUsuario/myportfolio.git](https://github.com/Seu
 cd myportfolio
 ```
 
-2. Instale as dependências
+### 2. Instale as dependências
 ```
 npm install
 ```
@@ -53,7 +53,7 @@ Code snippet
 npm run dev
 ````
 
-### 4. Entrando no Portfólio  
+### 5. Entrando no Portfólio  
 Acesse `http://localhost:3000` no seu navegador para ver o resultado.
 
 ---
